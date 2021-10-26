@@ -14,6 +14,8 @@ RUN apt-get update && apt-get install -y \
     nano \
  && rm -rf /var/lib/apt/lists/*
 
+COPY . .
+
 # Create a working directory
 RUN mkdir /app
 WORKDIR /app
@@ -50,5 +52,3 @@ RUN conda install -y -c pytorch \
     "matplotlib" \
     "pytorch=0.4.0" \
  && conda clean -ya
-
-COPY . .
