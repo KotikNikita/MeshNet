@@ -7,7 +7,7 @@ This repository is not an original official implementation of the work, but a re
 
 ### Installation
 
-First you have to clone repository:
+First, you have to clone repository:
 ```
 git clone https://github.com/KotikNikita/MeshNet
 ```
@@ -23,12 +23,17 @@ docker build -t meshnet_docker -f Dockerfile .
 docker run -it meshnet_docker
 ```
 
+To run with GPU:
+1) Install [nvidia-container-toolkit](https://docs.nvidia.com/datacenter/cloud-native/container-toolkit/install-guide.html#).
+2) Specify `--gpus all` flag when running `docker run ...`.
+3) Set `'cuda_devices'` to `'0'` in `config/train_config.yaml` and `config/test_config.yaml`.
+
 ### Usage
 
 ##### Data Preparation
 
-Firstly, you should download the [reorganized ModelNet40 dataset](https://drive.google.com/open?id=1o9pyskkKMxuomI5BWuLjCG2nSv5iePZz). 
-To download train dataset, run following commnd
+First, you should download the [reorganized ModelNet40 dataset](https://drive.google.com/open?id=1o9pyskkKMxuomI5BWuLjCG2nSv5iePZz). 
+To download train and test dataset, run the following commnd
 ```
 bash download.sh
 ```
@@ -43,6 +48,12 @@ bash train.sh
 ```
 bash test.sh
 ```
+
+##### To run unit and integration tests, run:
+```
+bash tests.sh
+```
+(some tests require a dataset to pass)
 
 ### Modifications
 For each data file `XXX.off` in ModelNet, we reorganize it to the format required by MeshNet and store it into `XXX.npz`. The reorganized file includes two parts of data:
