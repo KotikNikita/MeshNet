@@ -18,6 +18,8 @@ RUN apt-get update && apt-get install -y \
 RUN mkdir /app
 WORKDIR /app
 
+COPY . .
+
 # Create a non-root user and switch to it
 RUN adduser --disabled-password --gecos '' --shell /bin/bash user \
  && chown -R user:user /app
@@ -50,5 +52,3 @@ RUN conda install -y -c pytorch \
     "matplotlib" \
     "pytorch=0.4.0" \
  && conda clean -ya
-
-COPY . .
