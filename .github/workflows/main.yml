@@ -17,6 +17,8 @@ on:
 jobs:
   testbox:
     runs-on: ubuntu-latest
+    container:
+       image: poliik/meshnet_docker:latest
     steps:  
     - uses: actions/checkout@v1
     - name: download data
