@@ -53,7 +53,7 @@ if __name__ == '__main__':
     if torch.cuda.is_available():
         model.load_state_dict(torch.load(cfg['load_model']))
     else:
-        model.load_state_dict(torch.load(cfg['load_model'],map_location=torch.device('cpu')))
+        model.load_state_dict(torch.load(cfg['load_model'],map_location='cpu'))
     model.eval()
 
     test_model(model)
