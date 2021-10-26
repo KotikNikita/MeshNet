@@ -3,7 +3,7 @@ cuda_devices: ''
 
 # dataset
 dataset:
-  data_root: '../ModelNet40_MeshNet/'
+  data_root: './ModelNet40_MeshNet/'
   augment_data: false
   max_faces: 1024
 
