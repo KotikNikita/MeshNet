@@ -1,7 +1,8 @@
 #!/bin/bash
 echo "Start downloading"
-
+ls -la
 wget --load-cookies /tmp/cookies.txt "https://docs.google.com/uc?export=download&confirm=$(wget --quiet --save-cookies /tmp/cookies.txt --keep-session-cookies --no-check-certificate 'https://docs.google.com/uc?export=download&id=1o9pyskkKMxuomI5BWuLjCG2nSv5iePZz' -O- | sed -rn 's/.*confirm=([0-9A-Za-z_]+).*/\1\n/p')&id=1o9pyskkKMxuomI5BWuLjCG2nSv5iePZz" -O data.zip && rm -rf /tmp/cookies.txt
+ls -la
 chmod 777 ./data.zip
 
 unzip data.zip
