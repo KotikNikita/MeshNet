@@ -1,3 +1,3 @@
 #!/bin/bash
 
-sudo python test.py
+python test.py
