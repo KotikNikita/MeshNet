@@ -1,5 +1,6 @@
 import unittest
 import sys
+import os
 import numpy as np
 import torch
 
@@ -10,10 +11,18 @@ class TestDataset(unittest.TestCase):
     @classmethod
     def setUpClass(cls):
         cls.cfgs = []
+        cls.loading_error = False
         for augment_data in [False, True]:
             for part in ['train', 'test']:
                 get_config = get_train_config if part == 'train' else get_test_config
-                cfg_from_file = get_config()
+                try:
+                    cfg_from_file = get_config()
+                except Exception as e:
+                    print(e)
+                    print("Before running dataset tests, download dataset by running 'bash download.sh'")
+                    cls.cfgs = []
+                    cls.loading_error = True
+                    return
                 data_root = cfg_from_file['dataset']['data_root']
                 cfg = {
                     'dataset': {
@@ -25,7 +34,6 @@ class TestDataset(unittest.TestCase):
             cls.cfgs.append((cfg, part))
 
     def setUp(self):
-        self.datasets = []
         for cfg, part in TestDataset.cfgs:
             np.random.seed(123)
             torch.manual_seed(123)
@@ -38,6 +46,7 @@ class TestDataset(unittest.TestCase):
         pass
 
     def test_shape(self):
+        self.assertFalse(TestDataset.loading_error)
         for (cfg, part), dataset in zip(TestDataset.cfgs, self.datasets):
             m = cfg['dataset']['max_faces']
             n_chosen = 50
