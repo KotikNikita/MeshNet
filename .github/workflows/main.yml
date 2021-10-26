@@ -21,5 +21,9 @@ jobs:
        image: poliik/meshnet_docker:latest
     steps:  
     - uses: actions/checkout@v1
-    - name: check
-      run: ls -la
+    - name: download data
+      run: bash download.sh
+    - name: train model
+      run: bash train.sh
+    - name: test model
+      run: bash test.sh
