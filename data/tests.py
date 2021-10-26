@@ -34,6 +34,7 @@ class TestDataset(unittest.TestCase):
             cls.cfgs.append((cfg, part))
 
     def setUp(self):
+        self.datasets = []
         for cfg, part in TestDataset.cfgs:
             np.random.seed(123)
             torch.manual_seed(123)
