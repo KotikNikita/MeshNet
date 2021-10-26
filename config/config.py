@@ -1,7 +1,7 @@
 import os
 import os.path as osp
 import yaml
-
+from yaml.loader import SafeLoader
 
 def _check_dir(dir, make_dir=True):
     if not osp.exists(dir):
@@ -14,7 +14,7 @@ def _check_dir(dir, make_dir=True):
 
 def get_train_config(config_file='config/train_config.yaml'):
     with open(config_file, 'r') as f:
-        cfg = yaml.load(f)
+        cfg = yaml.load(f, Loader=SafeLoader)
 
     _check_dir(cfg['dataset']['data_root'], make_dir=False)
     _check_dir(cfg['ckpt_root'])
@@ -24,7 +24,7 @@ def get_train_config(config_file='config/train_config.yaml'):
 
 def get_test_config(config_file='config/test_config.yaml'):
     with open(config_file, 'r') as f:
-        cfg = yaml.load(f)
+        cfg = yaml.load(f, Loader=SafeLoader)
 
     _check_dir(cfg['dataset']['data_root'], make_dir=False)
 
