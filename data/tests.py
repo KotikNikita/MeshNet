@@ -4,6 +4,7 @@ import numpy as np
 import torch
 
 from .ModelNet40 import ModelNet40
+from config import get_train_config, get_test_config
 
 class TestDataset(unittest.TestCase):
     @classmethod
@@ -11,9 +12,12 @@ class TestDataset(unittest.TestCase):
         cls.cfgs = []
         for augment_data in [False, True]:
             for part in ['train', 'test']:
+                get_config = get_train_config if part == 'train' else get_test_config
+                cfg_from_file = get_config()
+                data_root = cfg_from_file['dataset']['data_root']
                 cfg = {
                     'dataset': {
-                        'data_root': '../ModelNet40_MeshNet/',
+                        'data_root': data_root,
                         'augment_data': augment_data,
                         'max_faces': 1024,
                     }
