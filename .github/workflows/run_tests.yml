@@ -14,6 +14,7 @@ on:
   workflow_dispatch:
 
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
+# Running all tests except dataset tests, because those require downloaded dataset
 jobs:
   testbox:
     runs-on: ubuntu-latest
@@ -22,4 +23,4 @@ jobs:
     steps:  
     - uses: actions/checkout@v1
     - name: test model
-      run: bash tests.sh
+      run: python -m unittest models/tests.py -v
