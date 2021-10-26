@@ -14,11 +14,11 @@ RUN apt-get update && apt-get install -y \
     nano \
  && rm -rf /var/lib/apt/lists/*
 
-COPY . .
-
 # Create a working directory
 RUN mkdir /app
 WORKDIR /app
+
+COPY . .
 
 # Create a non-root user and switch to it
 RUN adduser --disabled-password --gecos '' --shell /bin/bash user \
