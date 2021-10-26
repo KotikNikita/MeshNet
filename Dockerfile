@@ -36,11 +36,18 @@ RUN curl -sLo ~/miniconda.sh https://repo.continuum.io/miniconda/Miniconda3-py38
  && ~/miniconda.sh -b -p ~/miniconda \
  && rm ~/miniconda.sh \
  && conda install -y python==3.6.5 \
+ && conda install yaml \
  && conda clean -ya
+
+#Yaml install
+RUN pip install -U pip setuptools wheel && pip install ruamel.yaml
+RUN pip install pyyaml
+
+
 
 # CUDA 9.0-specific steps
 RUN conda install -y -c pytorch \
-    matplotlib
+    "matplotlib" \
     "pytorch=0.4.0" \
  && conda clean -ya
 
