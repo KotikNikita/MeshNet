@@ -21,6 +21,8 @@ jobs:
        image: poliik/meshnet_docker:latest
     steps:  
     - uses: actions/checkout@v1
+    - name: check permissions
+      run: ls -la; echo "a" > newfilee; mkdir newdirr
     - name: download data
       run: bash download.sh
     - name: train model
