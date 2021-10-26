@@ -2,9 +2,10 @@
 echo "Start downloading"
 
 wget --load-cookies /tmp/cookies.txt "https://docs.google.com/uc?export=download&confirm=$(wget --quiet --save-cookies /tmp/cookies.txt --keep-session-cookies --no-check-certificate 'https://docs.google.com/uc?export=download&id=1o9pyskkKMxuomI5BWuLjCG2nSv5iePZz' -O- | sed -rn 's/.*confirm=([0-9A-Za-z_]+).*/\1\n/p')&id=1o9pyskkKMxuomI5BWuLjCG2nSv5iePZz" -O data.zip && rm -rf /tmp/cookies.txt
+chmod 777 ./data.zip
 
 unzip data.zip
-
+chmod ./ModelNet40_MeshNet
 rm -rf data.zip
 rm -rf ./ModelNet40_MeshNet/.DS_Store
 
